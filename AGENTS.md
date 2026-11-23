@@ -28,3 +28,10 @@ use the editor.
   own key and store it in Secrets.
 - **Secrets.** Lovable manages them. Do not put secret values in the repo.
 <!-- LOVABLE:END -->
+
+## Project rules
+
+- The shop walkthrough is a canvas frame sequence (every 2nd frame of the original 240-frame film, desktop 16:9 and mobile 9:16) loaded from CDN asset pointers in `src/assets/tour/*`; stations are frame indices in `Tour.tsx`. Why: scroll scrubbing an image sequence is smooth on every browser, unlike seeking a video.
+- Business data and rules (prices, hours, Dublin-time open status, slots, package totals) live only in `src/lib/shop.ts` with tests in `src/lib/shop.test.ts`. Why: one source of truth that the tour cards, sections and booking flow all read.
+- Services selection is shared between the package builder and the booking flow through `BookingProvider`. Why: "Book this package" hands the exact selection to booking.
+- Booking requests leave the site as a pre-filled text message to the shop phone; there is no backend. Why: no online booking system exists yet.

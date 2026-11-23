@@ -1,23 +1,45 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { BookingProvider } from "@/components/site/booking-context";
+import { Header } from "@/components/site/Header";
+import { Tour } from "@/components/site/Tour";
+import { Marquee } from "@/components/site/Marquee";
+import { Services } from "@/components/site/Services";
+import { Hours } from "@/components/site/Hours";
+import { Booking } from "@/components/site/Booking";
+import { Footer } from "@/components/site/Footer";
 
-// The home route ships no og:image, so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "Malik’s Barbers · Mulhuddart Village, Dublin 15" },
+      {
+        name: "description",
+        content: "Walk through Malik’s Barbers, see live opening hours, build your package and book a chair in Mulhuddart Village, Dublin 15.",
+      },
+      { property: "og:title", content: "Malik’s Barbers · Mulhuddart Village, Dublin 15" },
+      {
+        property: "og:description",
+        content: "Skin fades, beard trims and hot towel shaves. Take the scroll tour and book your chair.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <BookingProvider>
+      <Header />
+      <main>
+        <Tour />
+        <Marquee />
+        <Services />
+        <Hours />
+        <Booking />
+      </main>
+      <Footer />
+    </BookingProvider>
   );
 }
